@@ -8,7 +8,7 @@ void insertionSort(int arr[], int n, long long int *trocas, long long int *compa
         int key = arr[i];
         int j = i - 1;
 
-        // Realiza comparações e trocas
+        // Realiza comparações e trocas que envolvem elementos do vetor
         while (j >= 0 && arr[j] > key)
         {
             arr[j + 1] = arr[j];
@@ -45,7 +45,7 @@ void merge(int arr[], int left, int middle, int right, long long int *trocas, lo
     // Realiza a mesclagem dos vetores temporários de volta para arr[]
     while (i < n1 && j < n2)
     {
-        // Realiza comparações e trocas
+        // Realiza comparações e trocas que envolvem elementos do vetor
         if (L[i] <= R[j])
         {
             arr[k] = L[i];
@@ -81,42 +81,44 @@ void merge(int arr[], int left, int middle, int right, long long int *trocas, lo
     }
 }
 
-// Função principal
 int main()
 {
-    int Q;
-    printf("Numero Q de vetores: ");
-    scanf("%d", &Q);
+    int numero_de_vetores; // número de vetores
+    scanf("%d", &numero_de_vetores);
 
-    for (int q = 0; q < Q; q++)
+    int vetor_de_tamanhos[Q]; // tamanho de cada vetor
+    // for() para ler o tamanho de cada vetor separados por espaço
+    for (int i = 0; i < numero_de_vetores; i++)
     {
-        int N;
-        scanf("%d", &N);
+        scanf("%d", &vetor_de_tamanhos[i]);
+    }
 
-        int vetor[N];
-        for (int i = 0; i < N; i++)
+    for (int i = 0; i < numero_de_vetores; i++)
+    {
+        int tamanho_do_vetor = vetor_de_tamanhos[i];
+        int matrix_de_vetores[i][tamanho_do_vetor];
+        int copia_da_matrix_para_insertion[i][tamanho_do_vetor];
+        for (int j = 0; j < tamanho_do_vetor; j++)
         {
-            scanf("%d", &vetor[i]);
+            scanf("%d", &matrix_de_vetores[i][j]);
+            copia_da_matrix_para_insertion[i][j] = matrix_de_vetores[i][j];
         }
-
+    }
+    for (int i = 0; i < Q; i++)
+    {
         long long int trocas_insertion = 0;
         long long int comparacoes_insertion = 0;
         long long int trocas_merge = 0;
         long long int comparacoes_merge = 0;
 
         // Ordena o vetor usando o método de inserção
-        int copia_insertion[N];
-        for (int i = 0; i < N; i++)
-        {
-            copia_insertion[i] = vetor[i];
-        }
-        insertionSort(copia_insertion, N, &trocas_insertion, &comparacoes_insertion);
+        insertionSort(copia_da_matrix_para_insertion, tamanho_do_vetor, &trocas_insertion, &comparacoes_insertion);
 
         // Ordena o vetor usando o método de merge sort
         int copia_merge[N];
-        for (int i = 0; i < N; i++)
+        for (int j = 0; j < N; j++)
         {
-            copia_merge[i] = vetor[i];
+            copia_merge[j] = vetor[j];
         }
         int left = 0;
         int right = N - 1;
