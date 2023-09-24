@@ -1,13 +1,16 @@
 #include <stdio.h>
 
 // Função para realizar a ordenação por inserção
-void insertionSort(int arr[], int n, long long int *trocas, long long int *comparacoes) {
-    for (int i = 1; i < n; i++) {
+void insertionSort(int arr[], int n, long long int *trocas, long long int *comparacoes)
+{
+    for (int i = 1; i < n; i++)
+    {
         int key = arr[i];
         int j = i - 1;
 
         // Realiza comparações e trocas envolvendo elementos do vetor
-        while (j >= 0 && arr[j] > key) {
+        while (j >= 0 && arr[j] > key)
+        {
             arr[j + 1] = arr[j];
             j--;
             (*trocas)++;
@@ -17,7 +20,8 @@ void insertionSort(int arr[], int n, long long int *trocas, long long int *compa
 }
 
 // Função para realizar a ordenação por merge sort
-void merge(int arr[], int left, int middle, int right, long long int *trocas, long long int *comparacoes) {
+void merge(int arr[], int left, int middle, int right, long long int *trocas, long long int *comparacoes)
+{
     int n1 = middle - left + 1;
     int n2 = right - middle;
 
@@ -25,22 +29,28 @@ void merge(int arr[], int left, int middle, int right, long long int *trocas, lo
     int L[n1], R[n2];
 
     // Copia os dados para os vetores temporários L[] e R[]
-    for (int i = 0; i < n1; i++) {
+    for (int i = 0; i < n1; i++)
+    {
         L[i] = arr[left + i];
     }
-    for (int i = 0; i < n2; i++) {
+    for (int i = 0; i < n2; i++)
+    {
         R[i] = arr[middle + 1 + i];
     }
 
     int i = 0, j = 0, k = left;
 
     // Realiza a mesclagem dos vetores temporários de volta para arr[]
-    while (i < n1 && j < n2) {
+    while (i < n1 && j < n2)
+    {
         // Realiza comparações e trocas envolvendo elementos do vetor
-        if (L[i] <= R[j]) {
+        if (L[i] <= R[j])
+        {
             arr[k] = L[i];
             i++;
-        } else {
+        }
+        else
+        {
             arr[k] = R[j];
             j++;
         }
@@ -49,7 +59,8 @@ void merge(int arr[], int left, int middle, int right, long long int *trocas, lo
     }
 
     // Copia os elementos restantes de L[], se houver
-    while (i < n1) {
+    while (i < n1)
+    {
         arr[k] = L[i];
         i++;
         k++;
@@ -58,7 +69,8 @@ void merge(int arr[], int left, int middle, int right, long long int *trocas, lo
     }
 
     // Copia os elementos restantes de R[], se houver
-    while (j < n2) {
+    while (j < n2)
+    {
         arr[k] = R[j];
         j++;
         k++;
@@ -67,11 +79,13 @@ void merge(int arr[], int left, int middle, int right, long long int *trocas, lo
     }
 }
 
-int main() {
+int main()
+{
     int Q;
     scanf("%d", &Q);
 
-    for (int q = 0; q < Q; q++) {
+    for (int q = 0; q < Q; q++)
+    {
         int N;
         scanf("%d", &N);
 
@@ -82,27 +96,32 @@ int main() {
         long long int comparacoes_merge = 0;
 
         // Leitura dos valores do vetor e ordenação usando os métodos especificados
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < N; i++)
+        {
             scanf("%d", &vetor[i]);
         }
 
         // Ordenação por inserção
         int copia_insertion[N];
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < N; i++)
+        {
             copia_insertion[i] = vetor[i];
         }
         insertionSort(copia_insertion, N, &trocas_insertion, &comparacoes_insertion);
 
         // Ordenação por merge sort
         int copia_merge[N];
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < N; i++)
+        {
             copia_merge[i] = vetor[i];
         }
         int left = 0;
         int right = N - 1;
 
-        void mergeSort(int copia_merge[], int left, int right, long long int *trocas, long long int *comparacoes) {
-            if (left < right) {
+        void mergeSort(int copia_merge[], int left, int right, long long int *trocas, long long int *comparacoes)
+        {
+            if (left < right)
+            {
                 int middle = left + (right - left) / 2;
                 mergeSort(copia_merge, left, middle, trocas, comparacoes);
                 mergeSort(copia_merge, middle + 1, right, trocas, comparacoes);
